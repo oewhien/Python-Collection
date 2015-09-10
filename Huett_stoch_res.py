@@ -48,6 +48,19 @@ def getOmega(dels):
 
     return Omega
 
+def getHomo(A):
+    A_t = np.append([A[-1,:]],A[:-1,:],axis=0)
+    A_d = np.append(A[1:,:],[A[0,:]],axis=0)
+    AM = A.mean()
+    A2M = np.mean(A*A)
+    
+    V = AM*AM - A2M
+    
+    Xi = 0.5*(A*A_t + A*A_d - 2*A2M).mean(axis=0)
+    
+    h = 2.0*Xi/(V*Sigm*Sigm)
+    return h
+
 def readH5():
     f = h5py.File('fhn_1d_perBnd_noisy.h5')
     # inspect structure with vitables or something   
@@ -71,9 +84,16 @@ ax = f1.add_axes([0, 0, 1, 1])
 plt.imshow(v)
 f1.show()
 
+Sigm = np.abs(v.max() - v.min())
 delta = getDelta(v)
 Omega = getOmega(delta)
+redHom = getHomo(v)
+
 
 f2 = plt.figure()
 plt.plot(Omega)
 f2.show()
+
+f3 = plt.figure()
+plt.plot(redHom)
+f3.show()
