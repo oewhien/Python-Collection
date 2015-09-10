@@ -49,7 +49,7 @@ def getOmega(dels):
     return Omega
 
 def readH5():
-    f = h5py.File('/Users/erikB/Documents/Data_Diary/2015-05-24_FHN_WienerNoiseSeries/nsGain0_25/fhn_1d_perBnd_noisy.h5')
+    f = h5py.File('fhn_1d_perBnd_noisy.h5')
     # inspect structure with vitables or something   
     #y = np.array(f['/1/y'][()])
     #t = np.array(f['/1/t'][()])
