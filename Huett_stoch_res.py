@@ -1,14 +1,18 @@
 # -*- coding: utf-8 -*-
 """
-Spyder Editor
+Structure and noise detection based on the article 
+"Method for detecting the signature of noise-induced strcutures in spatiotemporal data sets"
+by M.Th. Hütt, R. Neff, H. Busch & F. Kaiser
+Phys. Rev. E 66: 026117 (2002)
 
-This is a temporary script file.
 """
 
-import h5py
+
 import matplotlib.pyplot as plt
 import numpy as np
 from PIL import Image
+from read_FHN_res import FHN_res
+import h5py 
 
 class deltaClass:
     """Has the forward and backward difference"""
@@ -61,27 +65,20 @@ def getHomo(A):
     h = 2.0*Xi/(V*Sigm*Sigm)
     return h
 
-def readH5():
-    f = h5py.File('fhn_1d_perBnd_noisy.h5')
-    # inspect structure with vitables or something   
-    #y = np.array(f['/1/y'][()])
-    #t = np.array(f['/1/t'][()])
-    #r = np.array(f['/1/rOut'][()])
-    v = np.array(f['/1/vOut'][()])
-    v = v.T
-    return v
 
 
-
-v = readH5()
-
-#v = np.asanyarray(Image.open('testBild_Streifen_Noise.tif'),float)
+resDat = FHN_res('/Users/erikB/Documents/Data_Diary/2015-05-24_FHN_WienerNoiseSeries/nsGain0_15/fhn_1d_perBnd_noisy.h5')
+v = resDat.v;
+#v = np.asanyarray(Image.open('stripToNoisy.tif'),float)
 
 
 # test
 f1 = plt.figure()
 ax = f1.add_axes([0, 0, 1, 1])
 plt.imshow(v)
+plt.title('Spatiotemporal') 
+plt.xlabel('t')
+plt.ylabel('s')
 f1.show()
 
 Sigm = np.abs(v.max() - v.min())
@@ -92,8 +89,14 @@ redHom = getHomo(v)
 
 f2 = plt.figure()
 plt.plot(Omega)
+plt.title('Omega') 
+plt.xlabel('t')
+plt.ylabel('Omega')
 f2.show()
 
 f3 = plt.figure()
+plt.title('Reduced homogeneity') 
+plt.xlabel('t')
+plt.ylabel('H_s')
 plt.plot(redHom)
 f3.show()
