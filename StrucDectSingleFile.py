@@ -14,10 +14,10 @@ import Struc_Noise_Dect as SND
 
 
 
-resDat = FHN_res('fhn_1d_perBnd_noisy.h5')
+resDat = FHN_res('fhn_1d_perBnd_noisy_scriptable_nsGain_0.15_seed1_247seed2_321seed3_423.mat')
 v = resDat.v;
-#v = np.asanyarray(Image.open('stripToNoisy.tif'),float)
-
+#v = np.asanyarray(Image.open('balken.tif'),float)
+#v = (v>1)*1.0
 
 # test
 f1 = plt.figure()
@@ -44,6 +44,6 @@ f2.show()
 f3 = plt.figure()
 plt.title('Reduced homogeneity') 
 plt.xlabel('t')
-plt.ylabel('H_s')
+plt.ylabel('h')
 plt.plot(redHom)
 f3.show()

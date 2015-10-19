@@ -55,12 +55,13 @@ def getHomo(A):
     Sigm = np.abs(A.max() - A.min())
     A_t = np.append([A[-1,:]],A[:-1,:],axis=0)
     A_d = np.append(A[1:,:],[A[0,:]],axis=0)
-    AM = A.mean()
-    A2M = np.mean(A*A)
+    AM = A.mean(axis=0)
+    A2M = np.mean(A*A,axis=0)    
     
     V = AM*AM - A2M
-    
+
     Xi = 0.5*(A*A_t + A*A_d - 2*A2M).mean(axis=0)
     
     h = 2.0*Xi/(V*Sigm*Sigm)
+    h[np.isnan(h)] = 0; 
     return h
