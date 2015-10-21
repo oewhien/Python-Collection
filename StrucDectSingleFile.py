@@ -14,10 +14,10 @@ import Struc_Noise_Dect as SND
 
 
 
-resDat = FHN_res('fhn_1d_perBnd_noisy_scriptable_nsGain_0.15_seed1_247seed2_321seed3_423.mat')
-v = resDat.v;
-#v = np.asanyarray(Image.open('balken.tif'),float)
-#v = (v>1)*1.0
+#resDat = FHN_res('fhn_1d_perBnd_noisy_scriptable_nsGain_0.15_seed1_247seed2_321seed3_423.mat')
+#v = resDat.v;
+v = np.asanyarray(Image.open('testBild_Streifen_Noise.tif'),float)
+v = (v>1)*1.0
 
 # test
 f1 = plt.figure()

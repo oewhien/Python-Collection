@@ -18,7 +18,7 @@ import Struc_Noise_Dect as SND
 
 def analyseSim(cRes):
     v = cRes.v 
-    v = (v>0)*1.0
+    #v = (v>0)*1.0
     delta = SND.getDelta(v)
     Omega = SND.getOmega(delta)
     redHom = SND.getHomo(v)
@@ -53,7 +53,7 @@ for file in fileList:
         OmMVals = np.append(OmMVals,res.OmegaM)
         rHomVals = np.append(rHomVals,res.redHomM)                
         
-
+plt.figure()
 plt.plot(OmMVals,rHomVals,'o')
 plt.ylabel("H")
 plt.xlabel("Omega")
